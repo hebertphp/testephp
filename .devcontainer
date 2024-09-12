@@ -1,0 +1,16 @@
+# Usar a imagem base do PHP
+FROM php:8.2-apache
+
+# Instalar o SQLite
+RUN apt-get update && \
+    apt-get install -y libsqlite3-dev && \
+    docker-php-ext-install pdo pdo_sqlite
+
+# Configurar o diretório de trabalho
+WORKDIR /var/www/html
+
+# Copiar o código do projeto para o contêiner
+COPY . /var/www/html
+
+# Expor a porta padrão do Apache
+EXPOSE 80
